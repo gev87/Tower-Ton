@@ -1,6 +1,6 @@
 // app/page.tsx
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useTelegram } from "@/hooks/useTelegram";
 import MainButton from "@/components/MainButton";
 
