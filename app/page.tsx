@@ -45,7 +45,7 @@ export default function Home() {
   }, [tg]);
 
   return (
-    <div className="relative flex  h-screen flex-col">
+    <div className="relative flex h-screen flex-col overflow-hidden">
       <Header />
       <Image
         src="/images/tower-bg.png"
