@@ -10,11 +10,11 @@ import { Jaro, Montserrat } from "next/font/google";
 //   subsets: ["latin"],
 // });
 
-export const jaro = Jaro({
+const jaro = Jaro({
   variable: "--font-jaro",
   subsets: ["latin"],
 });
-export const montserrat = Montserrat({
+const montserrat = Montserrat({
   variable: "--font-montserrat",
   subsets: ["latin"],
 });
@@ -34,7 +34,6 @@ export const montserrat = Montserrat({
 //     </html>
 //   );
 // }
-
 
 import Script from "next/script";
 import type { Metadata } from "next";
