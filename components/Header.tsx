@@ -5,7 +5,7 @@ import ProgressCard from "./ProgressCard";
 
 function Header() {
     return (
-      <header className="relative z-1 w-full flex-col bg-gradient-to-b from-[#132023] to-[rgba(26,44,49,0)] p-[16px_18px] pt-7">
+      <header className="relative z-1 w-full flex-col bg-gradient-to-b from-[#132023] to-[rgba(26,44,49,0)] p-[16px_18px]">
         <div className="flex justify-between gap-2">
           <div className="flex gap-2">
             <button className="flex h-[40px] w-[46px] cursor-pointer items-center justify-center rounded-[4px] bg-[#2A4349]">

@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState, useCallback } from "react";
+import { useRef, useState, useCallback, useEffect } from "react";
 import sundukImg from "@/public/images/sunduk.png";
 
 export default function TreasureBox() {
@@ -13,11 +13,12 @@ export default function TreasureBox() {
 
     if (playing) {
       vid.pause();
-      // rewind when pausing
       vid.currentTime = 0;
     } else {
-      vid.muted = false;
-      vid.play();
+      vid.muted = false; // Enable sound if allowed
+      vid.play().catch((err) => {
+        console.warn("Playback failed:", err);
+      });
     }
 
     setPlaying(!playing);
@@ -27,26 +28,34 @@ export default function TreasureBox() {
     const vid = videoRef.current;
     if (!vid) return;
 
-    // rewind and reset to poster
     vid.currentTime = 0;
     vid.pause();
-    // calling load() forces the poster to show
-    vid.load();
-
+    vid.load(); // Show poster again
     setPlaying(false);
   }, []);
 
+  // iOS fix: set muted=true initially so video can load
+  useEffect(() => {
+    const vid = videoRef.current;
+    if (vid) vid.muted = true;
+  }, []);
+
   return (
-    <div className="relative inline-block h-auto w-[142px]">
-      <video
-        ref={videoRef}
-        src="/videos/sunduk.webm"
-        poster={sundukImg.src}
-        className="cursor-pointer rounded-lg"
-        onClick={handleToggle}
-        onEnded={handleEnded}
-        playsInline
-      />
+    <div className="relative inline-block h-[123px] w-[142px] overflow-hidden">
+      <div className="absolute bottom-[-20px]">
+        <video
+          ref={videoRef}
+          src="/videos/sunduk.webm"
+          poster={sundukImg.src}
+          className="cursor-pointer rounded-lg"
+          onClick={handleToggle}
+          onEnded={handleEnded}
+          playsInline
+          muted
+          controls={false}
+          preload="metadata"
+        />
+      </div>
     </div>
   );
 }

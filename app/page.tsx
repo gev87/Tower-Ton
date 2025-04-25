@@ -45,7 +45,7 @@ export default function Home() {
   }, [tg]);
 
   return (
-    <div className="relative flex  h-screen flex-col overflow-hidden">
+    <div className="relative flex  h-screen flex-col">
       <Header />
       <Image
         src="/images/tower-bg.png"
@@ -54,8 +54,8 @@ export default function Home() {
         style={{ objectPosition: "center" }}
         priority
       />
-      <div className="flex h-full justify-between">
-        <div className="flex flex-col justify-between gap-[8px] ">
+      <div className="relative flex h-full justify-between ">
+        <div className="flex flex-col justify-between">
           <div className="flex flex-col gap-[8px]">
             <button className="relative z-1 ml-[16px] inline-block cursor-pointer">
               <Image
@@ -159,16 +159,18 @@ export default function Home() {
               </div>
             </button>
           </div>
-          <div className="relative h-[250px] w-[250px]">
-            <Image
-              src={gnomAnimation}
-              alt="gnom animation"
-              width={gnomAnimation.width}
-              height={gnomAnimation.height}
-              unoptimized
-              className="h-auto w-full scale-x-[-1] transform"
-            />
-            <button className="absolute top-[30px] right-[5px] h-full w-[150px] cursor-pointer"></button>
+          <div className="relative h-[220px] w-[150px] overflow-hidden">
+            <div className="absolute top-[-30px] left-[-100px]">
+              <Image
+                src={gnomAnimation}
+                alt="gnom animation"
+                width={gnomAnimation.width}
+                height={gnomAnimation.height}
+                unoptimized
+                className="h-auto w-[250px] scale-x-[-1] transform"
+              />
+            </div>
+            <button className="absolute top-[30px] right-[5px] h-full w-full cursor-pointer" />
           </div>
         </div>
       </div>
