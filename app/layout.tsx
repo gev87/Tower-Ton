@@ -1,4 +1,4 @@
-// import { Geist, Geist_Mono } from "next/font/google";
+import { Jaro, Montserrat } from "next/font/google";
 
 // const geistSans = Geist({
 //   variable: "--font-geist-sans",
@@ -10,6 +10,14 @@
 //   subsets: ["latin"],
 // });
 
+export const jaro = Jaro({
+  variable: "--font-jaro",
+  subsets: ["latin"],
+});
+export const montserrat = Montserrat({
+  variable: "--font-montserrat",
+  subsets: ["latin"],
+});
 
 // export default function RootLayout({
 //   children,
@@ -27,21 +35,26 @@
 //   );
 // }
 
-// app/layout.tsx
-
 
 import Script from "next/script";
 import type { Metadata } from "next";
+import "@/app/globals.css";
 
 export const metadata: Metadata = {
   title: "Tower Ton",
   description: "Tower Ton is a Telegram Web App for the Tower Ton project.",
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className="min-h-screen bg-[--tg-theme-bg-color] text-[--tg-theme-text-color]">
+      <body
+        className={`${montserrat.className} ${jaro.className} ${montserrat.variable} ${jaro.variable} min-h-[var(--tg-viewport-height)] bg-[--tg-theme-bg-color] text-[--tg-theme-text-color] antialiased`}
+      >
         {/* Telegram injects CSS variables for colors */}
         <Script
           id="tg-sdk"
@@ -49,8 +62,21 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           strategy="beforeInteractive"
         />
         {children}
+
+        {/* <main className="flex-1 overflow-auto">{children}</main> */}
+        {/* <main className="relative flex  h-screen flex-col overflow-hidden">
+          <Header />
+          <Image
+            src="/images/tower-bg.png"
+            alt="tower" // decorative, so empty alt
+            fill // covers the parent div
+            style={{ objectPosition: "center" }}
+            priority // load immediately
+          />
+
+          <Footer />
+        </main> */}
       </body>
     </html>
   );
 }
-
