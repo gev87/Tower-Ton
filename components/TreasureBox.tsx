@@ -45,16 +45,17 @@ export default function TreasureBox() {
       <div className="absolute bottom-[-20px]">
         <video
           ref={videoRef}
-          src="/videos/sunduk.webm"
+          // src="/videos/sunduk.webm"
           poster={sundukImg.src}
           className="cursor-pointer rounded-lg"
           onClick={handleToggle}
           onEnded={handleEnded}
           playsInline
           muted
-          controls={false}
           preload="metadata"
-        />
+        >
+          <source src="/videos/sunduk.webm" type="video/webm" />
+        </video>
       </div>
     </div>
   );
