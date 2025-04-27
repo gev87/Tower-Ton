@@ -53,6 +53,7 @@ export default function TreasureBox() {
           playsInline
           muted
           preload="metadata"
+          controls
         >
           <source src="/videos/sunduk.webm" type="video/webm" />
         </video>
