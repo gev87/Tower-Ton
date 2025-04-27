@@ -5,23 +5,23 @@ import sundukImg from "@/public/images/sunduk.png";
 
 export default function TreasureBox() {
   const videoRef = useRef<HTMLVideoElement>(null);
-  const [playing, setPlaying] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(false);
 
-  const handleToggle = useCallback(() => {
+  const handlePlay = useCallback(() => {
     const vid = videoRef.current;
-    if (!vid) return;
+    if (!vid || isPlaying) return;
 
-    if (playing) {
-      vid.pause();
-      vid.currentTime = 0;
-    } else {
-      vid.play().catch((err) => {
-        console.warn("Playback failed:", err);
-      });
-    }
+  vid
+    .play()
+    .then(() => {
+      vid.muted = false; // Unmute after successful play
+    })
+    .catch((err) => {
+      console.warn("Playback failed:", err);
+    });
 
-    setPlaying(!playing);
-  }, [playing]);
+    setIsPlaying(true);
+  }, [isPlaying]);
 
   const handleEnded = useCallback(() => {
     const vid = videoRef.current;
@@ -29,10 +29,11 @@ export default function TreasureBox() {
 
     vid.currentTime = 0;
     vid.pause();
-    vid.load();
-    setPlaying(false);
+    vid.load(); // Show poster again
+    setIsPlaying(false);
   }, []);
 
+  // iOS fix: set muted=true initially so video can load
   useEffect(() => {
     const vid = videoRef.current;
     if (vid) vid.muted = true;
@@ -40,21 +41,20 @@ export default function TreasureBox() {
 
   return (
     <div className="relative inline-block h-[123px] w-[142px] overflow-hidden">
-      <div className="absolute bottom-[-10px]">
+      <div className="absolute bottom-[-20px]" />
         <video
           ref={videoRef}
+          src="/videos/sunduk.webm"
           poster={sundukImg.src}
           className="cursor-pointer rounded-lg"
-          onClick={handleToggle}
+          onClick={handlePlay}
           onEnded={handleEnded}
           playsInline
           muted
+          controls={false}
           preload="metadata"
-          controls
-        >
-          <source src="/videos/sunduk.webm" type="video/webm" />
-        </video>
-      </div>
+        />
+     
     </div>
   );
 }
