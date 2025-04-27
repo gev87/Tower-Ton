@@ -7,22 +7,22 @@ export default function TreasureBox() {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [playing, setPlaying] = useState(false);
 
-  const handleToggle = useCallback(() => {
-    const vid = videoRef.current;
-    if (!vid) return;
+const handleToggle = useCallback(() => {
+  const vid = videoRef.current;
+  if (!vid) return;
 
-    if (playing) {
-      vid.pause();
-      vid.currentTime = 0;
-    } else {
-      vid.muted = false; // Enable sound if allowed
-      vid.play().catch((err) => {
-        console.warn("Playback failed:", err);
-      });
-    }
+  if (playing) {
+    vid.pause();
+    vid.currentTime = 0;
+  } else {
+    vid.play().catch((err) => {
+      console.warn("Playback failed:", err);
+    });
+  }
 
-    setPlaying(!playing);
-  }, [playing]);
+  setPlaying(!playing);
+}, [playing]);
+
 
   const handleEnded = useCallback(() => {
     const vid = videoRef.current;
@@ -42,7 +42,7 @@ export default function TreasureBox() {
 
   return (
     <div className="relative inline-block h-[123px] w-[142px] overflow-hidden">
-      <div className="absolute bottom-[-10px]">
+      <div className="absolute bottom-[-5px]">
         <video
           ref={videoRef}
           // src="/videos/sunduk.webm"
@@ -53,7 +53,7 @@ export default function TreasureBox() {
           playsInline
           muted
           preload="metadata"
-          controls
+          controls={false}
         >
           <source src="/videos/sunduk.webm" type="video/webm" />
         </video>
