@@ -54,8 +54,8 @@ export default function TreasureBox() {
           controls={false}
           x-webkit-airplay="allow"
         >
-          <source src="/videos/sunduk.webm" type="video/webm" />
-          {/* <source src="/videos/sunduk.mp4" type="video/mp4" /> */}
+          <source src="/videos/sunduk.webm" type='video/webm; codecs="vp9"' />
+          <source src="/videos/sunduk.mp4" type="video/mp4" />
           Your browser does not support the video tag.
         </video>
       </div>
